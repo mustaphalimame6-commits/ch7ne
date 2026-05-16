@@ -138,7 +138,7 @@ const TESTIMONIALS = [
     rating: 5,
   },
   {
-    text: 'أول مرة نشحن من موقع موريتاني ونحس بثقة حقيقية. شكراً CH7N!',
+    text: 'أول مرة أشحن من موقع موريتاني وأحس بثقة حقيقية. شكراً CH7N!',
     author: 'فاطمة',
     city: 'نواذيبو',
     rating: 5,
@@ -557,4 +557,64 @@ function HomePage() {
             </p>
             <div className="community-phrases">
               {[
-    
+                { Icon: TrendingUp,    text: 'هذا المشروع يبنى معكم — رأيكم يطورنا' },
+                { Icon: MessageCircle, text: 'ثقتكم هي البداية والأساس الذي نبني عليه' },
+                { Icon: Users,         text: 'نحن صادقون: نتعلم ونتطور خطوة بخطوة' },
+              ].map(({ Icon, text }, i) => (
+                <div key={i} className="community-phrase">
+                  <Icon size={16} style={{ flexShrink: 0, color: 'var(--green)' }} />
+                  <span>{text}</span>
+                </div>
+              ))}
+            </div>
+            <div className="stats-grid">
+              {[
+                { value: '24/7', label: 'دعم مستمر' },
+                { value: '5★',   label: 'تقييم الزبائن' },
+                { value: '+100', label: 'طلب مكتمل' },
+              ].map((s, i) => (
+                <div key={i} className="stat-item">
+                  <span className="stat-value">{s.value}</span>
+                  <span className="stat-label">{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Testimonials ── */}
+        <section className="testimonials-section">
+          <StepBadge number={0} label="ماذا قال زبائننا" />
+          <div className="testimonials-grid">
+            {TESTIMONIALS.map((t, i) => (
+              <div key={i} className="testimonial-card">
+                <div className="testimonial-stars">
+                  {Array.from({ length: t.rating }).map((_, j) => (
+                    <svg key={j} width="14" height="14" viewBox="0 0 24 24" fill="#f59e0b">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="testimonial-text">"{t.text}"</p>
+                <div className="testimonial-author">
+                  <span>{t.author}</span>
+                  <span className="testimonial-city">{t.city}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Footer ── */}
+        <footer className="footer">
+          <img src="/logo.png" alt="CH7N" className="footer-logo" />
+          <p className="footer-text">
+            <strong>CH7N</strong> — شحن سريع، تعامل صادق، ثقة حقيقية
+          </p>
+          <p className="footer-copy">© CH7N 2026 — جميع الحقوق محفوظة</p>
+        </footer>
+
+      </main>
+    </div>
+  )
+}
