@@ -2,8 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState, useCallback, useMemo } from 'react'
 import {
   Zap, Shield, Users, Clock, Copy, Check,
-  Gamepad2, Gem, CreditCard, Phone, ChevronRight,
-  Star, MessageCircle, Award, TrendingUp
+  Gamepad2, MessageCircle, Award, TrendingUp, Phone
 } from 'lucide-react'
 
 export const Route = createFileRoute('/')({
@@ -48,9 +47,9 @@ const GAMES: Game[] = [
     currency: 'UC',
     requiresId: true,
     packages: [
-      { amount: 60, currency: 'UC', price: 55 },
-      { amount: 325, currency: 'UC', price: 210, popular: true },
-      { amount: 660, currency: 'UC', price: 410 },
+      { amount: 60,   currency: 'UC', price: 55 },
+      { amount: 325,  currency: 'UC', price: 210, popular: true },
+      { amount: 660,  currency: 'UC', price: 410 },
       { amount: 1800, currency: 'UC', price: 1040 },
       { amount: 3850, currency: 'UC', price: 2200 },
     ],
@@ -62,9 +61,9 @@ const GAMES: Game[] = [
     currency: 'Diamond',
     requiresId: true,
     packages: [
-      { amount: 110, currency: 'Diamond', price: 48 },
-      { amount: 231, currency: 'Diamond', price: 95 },
-      { amount: 583, currency: 'Diamond', price: 235, popular: true },
+      { amount: 110,  currency: 'Diamond', price: 48 },
+      { amount: 231,  currency: 'Diamond', price: 95 },
+      { amount: 583,  currency: 'Diamond', price: 235, popular: true },
       { amount: 1188, currency: 'Diamond', price: 455 },
       { amount: 2420, currency: 'Diamond', price: 899 },
     ],
@@ -76,12 +75,15 @@ const GAMES: Game[] = [
     currency: 'Coin',
     requiresId: false,
     packages: [
-      { amount: 70, currency: 'Coin', price: 60 },
+      { amount: 70,  currency: 'Coin', price: 60 },
       { amount: 100, currency: 'Coin', price: 85 },
       { amount: 200, currency: 'Coin', price: 150 },
       { amount: 350, currency: 'Coin', price: 220, popular: true },
     ],
   },
+
+  // ── مؤقتاً معلّقة — أعد تفعيلها بإزالة /* و */ ──────────────────────────
+  /*
   {
     id: 'efootball',
     name: 'eFootball',
@@ -89,9 +91,9 @@ const GAMES: Game[] = [
     currency: 'Coin',
     requiresId: true,
     packages: [
-      { amount: 100, currency: 'Coin', price: 55 },
-      { amount: 300, currency: 'Coin', price: 155, popular: true },
-      { amount: 600, currency: 'Coin', price: 295 },
+      { amount: 100,  currency: 'Coin', price: 55 },
+      { amount: 300,  currency: 'Coin', price: 155, popular: true },
+      { amount: 600,  currency: 'Coin', price: 295 },
       { amount: 1200, currency: 'Coin', price: 560 },
     ],
   },
@@ -102,25 +104,30 @@ const GAMES: Game[] = [
     currency: 'CP',
     requiresId: true,
     packages: [
-      { amount: 80, currency: 'CP', price: 50 },
-      { amount: 400, currency: 'CP', price: 215, popular: true },
-      { amount: 800, currency: 'CP', price: 410 },
+      { amount: 80,   currency: 'CP', price: 50 },
+      { amount: 400,  currency: 'CP', price: 215, popular: true },
+      { amount: 800,  currency: 'CP', price: 410 },
       { amount: 2000, currency: 'CP', price: 990 },
     ],
   },
+  */
+  // ─────────────────────────────────────────────────────────────────────────
 ]
 
 const PAYMENT_METHODS: PaymentMethod[] = [
   { id: 'bankily', name: 'Bankily', image: '/bankily.png', number: '48263620' },
   { id: 'sedad',   name: 'Sedad',   image: '/sedad.png',   number: '48263620' },
-  { id: 'masrifi', name: 'Masrifi', image: '/masrifi.png', number: '48263620' },
+
+  // ── مؤقتاً معلّقة — أعد تفعيلها بإزالة // ───────────────────────────────
+  // { id: 'masrifi', name: 'Masrifi', image: '/masrifi.png', number: '48263620' },
+  // ─────────────────────────────────────────────────────────────────────────
 ]
 
 const TRUST_CARDS = [
-  { icon: Zap,     title: 'شحن سريع',       desc: 'تُنجز طلبك خلال دقائق بعد تأكيد الدفع' },
-  { icon: Users,   title: 'دعم حقيقي',       desc: 'تواصل مع شخص حقيقي، لا روبوتات' },
-  { icon: Award,   title: 'احترام الزبون',   desc: 'كل زبون يُعامل باحترام واهتمام كامل' },
-  { icon: Shield,  title: 'خدمة آمنة',       desc: 'معاملاتك محمية وبياناتك في أمان تام' },
+  { icon: Zap,    title: 'شحن سريع',     desc: 'تُنجز طلبك خلال دقائق بعد تأكيد الدفع' },
+  { icon: Users,  title: 'دعم حقيقي',     desc: 'تواصل مع شخص حقيقي، لا روبوتات' },
+  { icon: Award,  title: 'احترام الزبون', desc: 'كل زبون يُعامل باحترام واهتمام كامل' },
+  { icon: Shield, title: 'خدمة آمنة',     desc: 'معاملاتك محمية وبياناتك في أمان تام' },
 ]
 
 const TESTIMONIALS = [
@@ -216,7 +223,11 @@ function GameCard({ game, active, onClick }: { game: Game; active: boolean; onCl
 
 function PackageCard({ pkg, active, onClick }: { pkg: Package; active: boolean; onClick: () => void }) {
   return (
-    <button className={`pkg-card ${active ? 'pkg-card--active' : ''} ${pkg.popular ? 'pkg-card--popular' : ''}`} onClick={onClick} aria-pressed={active}>
+    <button
+      className={`pkg-card ${active ? 'pkg-card--active' : ''} ${pkg.popular ? 'pkg-card--popular' : ''}`}
+      onClick={onClick}
+      aria-pressed={active}
+    >
       {pkg.popular && <span className="pkg-popular-badge">الأكثر طلباً</span>}
       {active && <div className="pkg-check"><Check size={10} /></div>}
       <div className="pkg-amount">
@@ -280,7 +291,11 @@ function HomePage() {
     ]
     setTimeout(() => {
       setIsLoading(false)
-      window.open(`https://wa.me/33775202?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer')
+      window.open(
+        `https://wa.me/33775202?text=${encodeURIComponent(lines.join('\n'))}`,
+        '_blank',
+        'noopener,noreferrer',
+      )
     }, 500)
   }, [canOrder, selectedGame, selectedPkg, selectedPayment, playerId, senderNumber])
 
@@ -312,17 +327,27 @@ function HomePage() {
         {/* ── Hero ── */}
         <section className="hero">
           <div className="hero-bg-glow" />
+
           <div className="hero-mascot-wrap">
             <div className="hero-mascot-ring" />
-            <img src="/mascot-welcome.png" alt="mascot" className="hero-mascot" />
+            <img
+              src="/mascot-welcome.png"
+              alt="mascot"
+              className="hero-mascot"
+              draggable={false}
+            />
           </div>
+
           <h1 className="hero-title">
             متاجر الشحن كثيرة...<br />
             <span>لكن الفرق بالتعامل</span>
           </h1>
           <p className="hero-desc">نبني هذا المشروع معكم خطوة بخطوة</p>
           <div className="hero-actions">
-            <button className="btn-primary" onClick={() => document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' })}>
+            <button
+              className="btn-primary"
+              onClick={() => document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               <Gamepad2 size={18} />
               ابدأ الشحن
             </button>
@@ -356,7 +381,12 @@ function HomePage() {
             <StepBadge number={1} label="اختر اللعبة" />
             <div className="games-grid">
               {GAMES.map((g) => (
-                <GameCard key={g.id} game={g} active={selectedGame.id === g.id} onClick={() => handleGameChange(g)} />
+                <GameCard
+                  key={g.id}
+                  game={g}
+                  active={selectedGame.id === g.id}
+                  onClick={() => handleGameChange(g)}
+                />
               ))}
             </div>
           </section>
@@ -366,7 +396,12 @@ function HomePage() {
             <StepBadge number={2} label="اختر الباقة" />
             <div className="packages-grid">
               {selectedGame.packages.map((pkg, i) => (
-                <PackageCard key={i} pkg={pkg} active={selectedPkg === pkg} onClick={() => setSelectedPkg(pkg)} />
+                <PackageCard
+                  key={i}
+                  pkg={pkg}
+                  active={selectedPkg === pkg}
+                  onClick={() => setSelectedPkg(pkg)}
+                />
               ))}
             </div>
           </section>
@@ -394,7 +429,12 @@ function HomePage() {
             <StepBadge number={4} label="طريقة الدفع" />
             <div className="payment-grid">
               {PAYMENT_METHODS.map((m) => (
-                <PaymentCard key={m.id} method={m} active={selectedPayment?.id === m.id} onClick={() => setSelectedPayment(m)} />
+                <PaymentCard
+                  key={m.id}
+                  method={m}
+                  active={selectedPayment?.id === m.id}
+                  onClick={() => setSelectedPayment(m)}
+                />
               ))}
             </div>
 
@@ -409,7 +449,9 @@ function HomePage() {
                   <div className="transfer-amount-row">
                     <span className="transfer-label">المبلغ الإجمالي</span>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                      <span className="transfer-amount" dir="ltr">{selectedPkg.price.toLocaleString('en-US')} MRU</span>
+                      <span className="transfer-amount" dir="ltr">
+                        {selectedPkg.price.toLocaleString('en-US')} MRU
+                      </span>
                       <CopyButton text={selectedPkg.price.toString()} />
                     </div>
                   </div>
@@ -452,15 +494,17 @@ function HomePage() {
                 </div>
                 <div className="summary-rows">
                   {[
-                    { label: 'اللعبة',    value: selectedGame.name },
-                    { label: 'الباقة',    value: `${selectedPkg.amount.toLocaleString('en-US')} ${selectedPkg.currency}` },
+                    { label: 'اللعبة', value: selectedGame.name },
+                    { label: 'الباقة', value: `${selectedPkg.amount.toLocaleString('en-US')} ${selectedPkg.currency}` },
                     ...(playerId ? [{ label: 'معرف اللاعب', value: playerId }] : []),
-                    { label: 'السعر',     value: `${selectedPkg.price.toLocaleString('en-US')} MRU`, highlight: true },
+                    { label: 'السعر', value: `${selectedPkg.price.toLocaleString('en-US')} MRU`, highlight: true },
                     ...(selectedPayment ? [{ label: 'طريقة الدفع', value: selectedPayment.name }] : []),
                   ].map((row, i) => (
                     <div key={i} className="summary-row">
                       <span className="summary-label">{row.label}</span>
-                      <span className={`summary-value ${(row as any).highlight ? 'summary-value--green' : ''}`}>{row.value}</span>
+                      <span className={`summary-value ${(row as any).highlight ? 'summary-value--green' : ''}`}>
+                        {row.value}
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -468,7 +512,7 @@ function HomePage() {
             </section>
           )}
 
-          {/* Step 5 — WhatsApp */}
+          {/* Step 5 */}
           <section className="section">
             <button
               className={`whatsapp-btn ${!canOrder ? 'whatsapp-btn--disabled' : ''}`}
@@ -482,23 +526,30 @@ function HomePage() {
                   <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.856L.057 23.215a.75.75 0 00.928.928l5.359-1.475A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z" />
                   </svg>
-                  {canOrder ? `اطلب الآن — ${selectedPkg?.price.toLocaleString('en-US')} MRU` : 'أكمل البيانات للمتابعة'}
+                  {canOrder
+                    ? `اطلب الآن — ${selectedPkg?.price.toLocaleString('en-US')} MRU`
+                    : 'أكمل البيانات للمتابعة'}
                 </>
               )}
             </button>
-            {!canOrder && (
-              <p className="field-hint" style={{ textAlign: 'center', marginTop: 8 }}>
-                <ChevronRight size={12} style={{ display: 'inline' }} />
-                اختر باقة، أدخل المعرف، وحدد طريقة الدفع
-              </p>
-            )}
           </section>
+
         </div>
 
         {/* ── Community ── */}
         <section className="community-section">
           <div className="community-banner">
-            <img src="/mascot-welcome.png" alt="" className="community-mascot" />
+
+            {/* الماسكوت يطل من أعلى البانر */}
+            <div className="community-mascot-wrap">
+              <img
+                src="/mascot-welcome.png"
+                alt=""
+                className="community-mascot"
+                draggable={false}
+              />
+            </div>
+
             <h2 className="community-title">نحن <span>نبني معاً</span></h2>
             <p className="community-desc">
               CH7N مشروع جديد في السوق، ونؤمن بالصدق مع زبائننا.<br />
@@ -506,62 +557,4 @@ function HomePage() {
             </p>
             <div className="community-phrases">
               {[
-                { Icon: TrendingUp, text: 'هذا المشروع يبنى معكم — رأيكم يطورنا' },
-                { Icon: MessageCircle, text: 'ثقتكم هي البداية والأساس الذي نبني عليه' },
-                { Icon: Users, text: 'نحن صادقون: نتعلم ونتطور خطوة بخطوة' },
-              ].map(({ Icon, text }, i) => (
-                <div key={i} className="community-phrase">
-                  <Icon size={16} style={{ flexShrink: 0, color: 'var(--green)' }} />
-                  <span>{text}</span>
-                </div>
-              ))}
-            </div>
-            <div className="stats-grid">
-              {[
-                { value: '24/7', label: 'دعم مستمر' },
-                { value: '5★',   label: 'تقييم الزبائن' },
-                { value: '+100', label: 'طلب مكتمل' },
-              ].map((s, i) => (
-                <div key={i} className="stat-item">
-                  <span className="stat-value">{s.value}</span>
-                  <span className="stat-label">{s.label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── Testimonials ── */}
-        <section className="testimonials-section">
-          <StepBadge number={0} label="ماذا قال زبائننا" />
-          <div className="testimonials-grid">
-            {TESTIMONIALS.map((t, i) => (
-              <div key={i} className="testimonial-card">
-                <div className="testimonial-stars">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} size={13} fill="#f59e0b" color="#f59e0b" />
-                  ))}
-                </div>
-                <p className="testimonial-text">"{t.text}"</p>
-                <div className="testimonial-author">
-                  <span>{t.author}</span>
-                  <span className="testimonial-city">{t.city}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Footer ── */}
-        <footer className="footer">
-          <img src="/logo.png" alt="CH7N" className="footer-logo" />
-          <p className="footer-text">
-            <strong>CH7N</strong> — شحن سريع، تعامل صادق، ثقة حقيقية
-          </p>
-          <p className="footer-copy">© CH7N 2026 — جميع الحقوق محفوظة</p>
-        </footer>
-
-      </main>
-    </div>
-  )
-}
+    
