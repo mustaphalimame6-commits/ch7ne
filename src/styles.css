@@ -548,8 +548,8 @@ body {
   direction: ltr;
 }
 .pkg-currency { font-size: 0.68rem; color: var(--green); font-weight: 700; }
-.pkg-price { font-size: 0.88rem; font-weight: 700; color: #34d399; direction: ltr; }
-.pkg-mru   { font-size: 0.64rem; color: #6ee7b7; }
+.pkg-price    { font-size: 0.88rem; font-weight: 700; color: #34d399; direction: ltr; }
+.pkg-mru      { font-size: 0.64rem; color: #6ee7b7; }
 
 /* ── Input Fields ───────────────────────────────────────────────────────── */
 
@@ -805,12 +805,10 @@ body {
   height: 115px;
   object-fit: contain;
   object-position: center bottom;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
   filter: drop-shadow(0 0 16px rgba(0,200,120,0.35));
   animation: mascot-float 6s ease-in-out infinite;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 .community-title {
   font-size: 1.3rem;
@@ -848,4 +846,95 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+}
+.stat-item { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.stat-value { font-size: 1.2rem; font-weight: 900; color: var(--green); }
+.stat-label { font-size: 0.67rem; color: var(--text-secondary); font-weight: 600; }
+
+/* ── Testimonials ───────────────────────────────────────────────────────── */
+
+.testimonials-section { position: relative; z-index: 1; margin-top: 28px; }
+.testimonials-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  transition: all 0.3s;
+}
+.testimonial-card:hover {
+  border-color: var(--border-active);
+  box-shadow: var(--glow-green);
+}
+.testimonial-stars {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 10px;
+}
+.testimonial-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--green);
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.testimonial-author::before {
+  content: '—';
+  color: var(--text-secondary);
+}
+.testimonial-city {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.75rem;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────── */
+
+.footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 44px;
+  padding: 22px 0 12px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.footer-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  opacity: 0.8;
+  border-radius: 8px;
+}
+.footer-text {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.footer-text strong { color: var(--green); }
+.footer-copy {
+  font-size: 0.66rem;
+  color: rgba(122,171,176,0.45);
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 360px) {
+  .games-grid    { grid-template-columns: repeat(3, 1fr); }
+  .packages-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-mascot   { width: 130px; height: 180px; }
 }
