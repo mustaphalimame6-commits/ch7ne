@@ -21,9 +21,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Cairo', system-ui, sans-serif;
   background: var(--bg);
@@ -44,9 +42,8 @@ body {
   50%      { transform: translateY(-8px); }
 }
 @keyframes mascot-float {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  33%      { transform: translateY(-10px) rotate(-1deg); }
-  66%      { transform: translateY(-5px) rotate(1deg); }
+  0%,100% { transform: translateY(0px); }
+  50%      { transform: translateY(-12px); }
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -69,6 +66,9 @@ body {
   0%,100% { opacity: 0.35; }
   50%      { opacity: 0.65; }
 }
+@keyframes ring-spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
 
 /* ── App Shell ──────────────────────────────────────────────────────────── */
 
@@ -78,7 +78,6 @@ body {
   overflow-x: hidden;
   position: relative;
 }
-
 .main {
   max-width: 680px;
   margin: 0 auto;
@@ -188,60 +187,79 @@ body {
 .hero {
   position: relative;
   z-index: 1;
-  padding: 44px 0 30px;
+  padding: 50px 0 34px;
   text-align: center;
   overflow: visible;
 }
 .hero-bg-glow {
   position: absolute;
-  top: -40px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 440px;
-  height: 380px;
-  background: radial-gradient(circle, rgba(0,200,120,0.1) 0%, transparent 70%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0,200,120,0.1) 0%, transparent 65%);
   animation: glow-hero 4s ease-in-out infinite;
   pointer-events: none;
+  z-index: 0;
 }
+
+/* الحاوية الرئيسية للماسكوت */
 .hero-mascot-wrap {
   position: relative;
-  display: inline-block;
-  margin-bottom: 24px;
-  overflow: visible;
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 220px;
+  height: 260px;
+  margin-bottom: 28px;
+  z-index: 1;
 }
-.hero-mascot {
-  width: 160px;
-  height: 220px;
-  object-fit: contain;
-  object-position: center bottom;
-  animation: mascot-float 5s ease-in-out infinite;
-  filter: drop-shadow(0 0 28px rgba(0,200,120,0.45));
-  position: relative;
-  z-index: 2;
-  display: block;
-}
+
+/* الحلقة الدوارة — مستقلة تماماً خلف الصورة */
 .hero-mascot-ring {
   position: absolute;
-  inset: -16px;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 1.5px solid rgba(0,200,120,0.2);
-  animation: spin 16s linear infinite;
+  border: 1.5px solid rgba(0,200,120,0.22);
+  animation: ring-spin 18s linear infinite;
   pointer-events: none;
-  overflow: visible;
+  z-index: 1;
 }
 .hero-mascot-ring::before {
   content: '';
   position: absolute;
-  top: -4px;
+  top: -5px;
   left: 50%;
-  width: 8px;
-  height: 8px;
+  width: 9px;
+  height: 9px;
   background: var(--green);
   border-radius: 50%;
-  box-shadow: 0 0 12px var(--green);
+  box-shadow: 0 0 14px var(--green);
   transform: translateX(-50%);
 }
+
+/* الصورة فوق الحلقة */
+.hero-mascot {
+  position: relative;
+  z-index: 2;
+  width: auto;
+  height: 100%;
+  max-width: 180px;
+  object-fit: contain;
+  object-position: center bottom;
+  animation: mascot-float 4s ease-in-out infinite;
+  filter: drop-shadow(0 8px 32px rgba(0,200,120,0.5));
+  display: block;
+}
+
 .hero-title {
+  position: relative;
+  z-index: 1;
   font-size: 1.5rem;
   font-weight: 900;
   color: var(--text-primary);
@@ -255,11 +273,15 @@ body {
   background-clip: text;
 }
 .hero-desc {
+  position: relative;
+  z-index: 1;
   font-size: 0.88rem;
   color: var(--text-secondary);
   margin-bottom: 26px;
 }
 .hero-actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   gap: 12px;
   justify-content: center;
@@ -358,7 +380,6 @@ body {
 /* ── Order Flow ─────────────────────────────────────────────────────────── */
 
 .order-flow { margin-top: 10px; }
-
 .section {
   position: relative;
   z-index: 1;
@@ -795,21 +816,29 @@ body {
   background: linear-gradient(135deg, rgba(0,200,120,0.06), rgba(13,79,143,0.08));
   border: 1px solid var(--border-active);
   border-radius: 20px;
-  padding: 28px 18px;
+  padding: 0 18px 28px;
   text-align: center;
   position: relative;
   overflow: visible;
 }
+
+/* الماسكوت في Community — يطل من الأعلى */
+.community-mascot-wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+  margin-top: -20px;
+}
 .community-mascot {
-  width: 85px;
-  height: 115px;
+  width: 110px;
+  height: 150px;
   object-fit: contain;
   object-position: center bottom;
-  margin: 0 auto 16px;
-  filter: drop-shadow(0 0 16px rgba(0,200,120,0.35));
+  filter: drop-shadow(0 4px 20px rgba(0,200,120,0.4));
   animation: mascot-float 6s ease-in-out infinite;
   display: block;
 }
+
 .community-title {
   font-size: 1.3rem;
   font-weight: 900;
@@ -855,7 +884,6 @@ body {
 
 .testimonials-section { position: relative; z-index: 1; margin-top: 28px; }
 .testimonials-grid { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-
 .testimonial-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -936,5 +964,6 @@ body {
 @media (max-width: 360px) {
   .games-grid    { grid-template-columns: repeat(3, 1fr); }
   .packages-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-mascot   { width: 130px; height: 180px; }
+  .hero-mascot   { max-width: 140px; }
+  .hero-mascot-wrap { height: 210px; }
 }
